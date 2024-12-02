@@ -14,8 +14,9 @@ fn main() -> Result<(), Error> {
         .filter(|r| {
             is_safe(r)
                 || (0..r.len()).any(|i| {
-                    let excluded: Vec<_> = r.iter().enumerate().filter(|&(j, _)| j != i).map(|(_, x)| *x).collect();
-                    is_safe(&excluded)
+                    let mut report = r.to_vec();
+                    report.remove(i);
+                    is_safe(&report)
                 })
         })
         .count();
