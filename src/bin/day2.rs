@@ -26,6 +26,6 @@ fn main() -> Result<(), Error> {
 }
 
 fn is_safe(r: &[i32]) -> bool {
-    let is_increasing = r[1] - r[0] > 0;
-    (0..r.len() - 1).all(|i| (r[i + 1] - r[i] > 0) == is_increasing && (1..=3).contains(&r[i].abs_diff(r[i + 1])))
+    (0..r.len() - 1)
+        .all(|i| (r[i + 1] - r[i]).signum() == (r[1] - r[0]).signum() && (1..=3).contains(&r[i].abs_diff(r[i + 1])))
 }
