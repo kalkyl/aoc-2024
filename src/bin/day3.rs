@@ -6,10 +6,7 @@ fn main() -> Result<(), Error> {
     let sum: i32 = muls(&input).iter().map(|(a, b)| a * b).sum();
     println!("Part one: {sum}");
 
-    let dos: String = input
-        .split("do()")
-        .filter_map(|s| s.split_once("don't()").map(|(l, _r)| l).or(Some(s)))
-        .collect();
+    let dos: String = input.split("do()").filter_map(|s| s.split("don't()").next()).collect();
     let sum: i32 = muls(&dos).iter().map(|(a, b)| a * b).sum();
     println!("Part two: {sum}");
 
