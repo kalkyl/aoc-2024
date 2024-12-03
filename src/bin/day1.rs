@@ -14,13 +14,13 @@ fn main() -> Result<(), Error> {
     list_r.sort();
 
     let diff_sum: u32 = list_l.iter().zip(list_r.iter()).map(|(l, r)| l.abs_diff(*r)).sum();
-    println!("Part one: {:?}", diff_sum);
+    println!("Part one: {diff_sum}");
 
-    let sim_score: u32 = list_l
+    let similarity_score: u32 = list_l
         .iter()
         .map(|l| l * list_r.iter().filter(|r| *r == l).count() as u32)
         .sum();
-    println!("Part two: {:?}", sim_score);
+    println!("Part two: {similarity_score}");
 
     Ok(())
 }

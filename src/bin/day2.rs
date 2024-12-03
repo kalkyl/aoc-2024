@@ -7,7 +7,7 @@ fn main() -> Result<(), Error> {
         .collect();
 
     let safe_count = reports.iter().filter(|r| is_safe(r)).count();
-    println!("Part one: {:?}", safe_count);
+    println!("Part one: {safe_count}");
 
     let safe_count = reports
         .iter()
@@ -20,7 +20,7 @@ fn main() -> Result<(), Error> {
                 })
         })
         .count();
-    println!("Part two: {:?}", safe_count);
+    println!("Part two: {safe_count}");
 
     Ok(())
 }
