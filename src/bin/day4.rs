@@ -9,7 +9,7 @@ fn main() -> Result<(), Error> {
     let mut count_part2 = 0;
     for y in 0..grid.len() {
         for x in 0..grid[y].len() {
-            //Part 1
+            // Part 1
             if grid[y][x] == word[0] {
                 for dy in -1..=1_i32 {
                     'dx_loop: for dx in -1..=1_i32 {
