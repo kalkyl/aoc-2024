@@ -12,8 +12,7 @@ fn main() -> Result<(), Error> {
             //Part 1
             if grid[y][x] == word[0] {
                 for dy in -1..=1_i32 {
-                    for dx in -1..=1_i32 {
-                        let mut found = true;
+                    'dx_loop: for dx in -1..=1_i32 {
                         for (i, c) in word.iter().enumerate().skip(1) {
                             let cx = x as i32 + dx * i as i32;
                             let cy = y as i32 + dy * i as i32;
@@ -21,13 +20,10 @@ fn main() -> Result<(), Error> {
                                 || !(0..grid.len() as i32).contains(&cy)
                                 || grid[cy as usize][cx as usize] != *c
                             {
-                                found = false;
-                                break;
+                                continue 'dx_loop;
                             }
                         }
-                        if found {
-                            count_part1 += 1;
-                        }
+                        count_part1 += 1;
                     }
                 }
             }
@@ -42,8 +38,8 @@ fn main() -> Result<(), Error> {
             }
         }
     }
-    println!("Part one: {:?}", count_part1);
-    println!("Part two: {:?}", count_part2);
+    println!("Part one: {count_part1}");
+    println!("Part two: {count_part2}");
 
     Ok(())
 }
