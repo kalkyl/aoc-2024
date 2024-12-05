@@ -12,13 +12,11 @@ fn main() {
 fn muls(input: &str) -> Vec<(i32, i32)> {
     input
         .split("mul(")
-        .filter_map(|s| {
-            s.split_once(')').and_then(|(l, _r)| {
-                l.split_once(',').and_then(|(a, b)| match (a.parse(), b.parse()) {
-                    (Ok(a), Ok(b)) => Some((a, b)),
-                    _ => None,
-                })
-            })
+        .filter_map(|s| s.split_once(')'))
+        .filter_map(|(l, _r)| l.split_once(','))
+        .filter_map(|(a, b)| match (a.parse(), b.parse()) {
+            (Ok(a), Ok(b)) => Some((a, b)),
+            _ => None,
         })
         .collect()
 }
