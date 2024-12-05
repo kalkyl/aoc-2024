@@ -28,8 +28,8 @@ fn main() {
 
             // Part 2
             if grid[y][x] == 'A' && (1..grid[y].len() - 1).contains(&x) && (1..grid.len() - 1).contains(&y) {
-                let d1 = String::from_iter([grid[y - 1][x - 1], 'A', grid[y + 1][x + 1]]);
-                let d2 = String::from_iter([grid[y + 1][x - 1], 'A', grid[y - 1][x + 1]]);
+                let d1 = format!("{}A{}", grid[y - 1][x - 1], grid[y + 1][x + 1]);
+                let d2 = format!("{}A{}", grid[y + 1][x - 1], grid[y - 1][x + 1]);
                 if (d1 == "MAS" || d1 == "SAM") && (d2 == "MAS" || d2 == "SAM") {
                     count_part2 += 1
                 }
