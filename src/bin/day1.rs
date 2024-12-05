@@ -1,7 +1,6 @@
-use std::{fs::read_to_string, io::Error};
-
-fn main() -> Result<(), Error> {
-    let lines: Vec<(u32, u32)> = read_to_string("./input/1.txt")?
+fn main() {
+    let lines: Vec<(u32, u32)> = std::fs::read_to_string("./input/1.txt")
+        .unwrap()
         .lines()
         .map(|s| s.split_once("   ").unwrap())
         .map(|(l, r)| (l.parse().unwrap(), r.parse().unwrap()))
@@ -21,6 +20,4 @@ fn main() -> Result<(), Error> {
         .map(|l| l * list_r.iter().filter(|r| *r == l).count() as u32)
         .sum();
     println!("Part two: {similarity_score}");
-
-    Ok(())
 }

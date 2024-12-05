@@ -1,7 +1,6 @@
-use std::{fs::read_to_string, io::Error};
-
-fn main() -> Result<(), Error> {
-    let reports: Vec<Vec<i32>> = read_to_string("./input/2.txt")?
+fn main() {
+    let reports: Vec<Vec<i32>> = std::fs::read_to_string("./input/2.txt")
+        .unwrap()
         .lines()
         .map(|s| s.split_whitespace().map(|x| x.parse().unwrap()).collect())
         .collect();
@@ -21,8 +20,6 @@ fn main() -> Result<(), Error> {
         })
         .count();
     println!("Part two: {safe_count}");
-
-    Ok(())
 }
 
 fn is_safe(r: &[i32]) -> bool {

@@ -1,7 +1,5 @@
-use std::{fs::read_to_string, io::Error};
-
-fn main() -> Result<(), Error> {
-    let input = read_to_string("./input/3.txt")?;
+fn main() {
+    let input = std::fs::read_to_string("./input/3.txt").unwrap();
 
     let sum: i32 = muls(&input).iter().map(|(a, b)| a * b).sum();
     println!("Part one: {sum}");
@@ -9,8 +7,6 @@ fn main() -> Result<(), Error> {
     let dos: String = input.split("do()").filter_map(|s| s.split("don't()").next()).collect();
     let sum: i32 = muls(&dos).iter().map(|(a, b)| a * b).sum();
     println!("Part two: {sum}");
-
-    Ok(())
 }
 
 fn muls(input: &str) -> Vec<(i32, i32)> {

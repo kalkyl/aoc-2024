@@ -1,7 +1,5 @@
-use std::{fs::read_to_string, io::Error};
-
-fn main() -> Result<(), Error> {
-    let input = read_to_string("./input/4.txt")?;
+fn main() {
+    let input = std::fs::read_to_string("./input/4.txt").unwrap();
     let grid: Vec<Vec<_>> = input.lines().map(|l| l.chars().collect()).collect();
 
     let word: Vec<_> = "XMAS".chars().collect();
@@ -40,6 +38,4 @@ fn main() -> Result<(), Error> {
     }
     println!("Part one: {count_part1}");
     println!("Part two: {count_part2}");
-
-    Ok(())
 }
