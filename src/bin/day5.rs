@@ -1,6 +1,6 @@
 fn main() {
     let input = std::fs::read_to_string("./input/5.txt").unwrap();
-    let lines: Vec<&str> = input.lines().collect();
+    let lines: Vec<_> = input.lines().collect();
     let sections: Vec<_> = lines.split(|line| line.is_empty()).collect();
     let rules: Vec<(u32, u32)> = sections[0]
         .iter()
