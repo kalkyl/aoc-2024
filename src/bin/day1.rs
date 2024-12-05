@@ -2,7 +2,7 @@ fn main() {
     let lines: Vec<(u32, u32)> = std::fs::read_to_string("./input/1.txt")
         .unwrap()
         .lines()
-        .map(|s| s.split_once("   ").unwrap())
+        .filter_map(|s| s.split_once("   "))
         .map(|(l, r)| (l.parse().unwrap(), r.parse().unwrap()))
         .collect();
 
