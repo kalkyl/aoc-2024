@@ -11,7 +11,7 @@ fn main() {
             if start_grid[y][x] == '.' {
                 let mut grid = start_grid.clone();
                 grid[y][x] = '#';
-                if run(grid).is_none() {
+                if run(grid).is_err() {
                     count_loops += 1;
                 }
             }
@@ -20,7 +20,7 @@ fn main() {
     println!("Part two: {count_loops}");
 }
 
-fn run(mut grid: Vec<Vec<char>>) -> Option<usize> {
+fn run(mut grid: Vec<Vec<char>>) -> Result<usize, ()> {
     let (mut x, mut y) = grid
         .iter()
         .enumerate()
@@ -42,8 +42,8 @@ fn run(mut grid: Vec<Vec<char>>) -> Option<usize> {
         y = (y as isize + dy) as usize;
         grid[y][x] = 'X';
         if !trace.insert(((x, y), (dx, dy))) {
-            return None;
+            return Err(());
         }
     }
-    Some(grid.iter().map(|r| r.iter().filter(|c| **c == 'X').count()).sum())
+    Ok(grid.iter().map(|r| r.iter().filter(|c| **c == 'X').count()).sum())
 }
