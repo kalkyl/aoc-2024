@@ -26,22 +26,19 @@ fn run(mut grid: Vec<Vec<char>>) -> Result<usize, ()> {
         .enumerate()
         .find_map(|(y, r)| r.iter().position(|c| *c == '^').map(|x| (x, y)))
         .unwrap();
-    let mut rx = [0, 1, 0, -1].into_iter().cycle();
-    let mut ry = [-1, 0, 1, 0].into_iter().cycle();
-    let (mut dx, mut dy) = (rx.next().unwrap(), ry.next().unwrap());
+    let mut d = [-1, 0, 1, 0];
     let (grid_w, grid_h) = (grid[0].len() as isize, grid.len() as isize);
     let mut trace: std::collections::HashSet<((usize, usize), (isize, isize))> = Default::default();
 
     grid[y][x] = 'X';
-    while (0..grid_h).contains(&(y as isize + dy)) && (0..grid_w).contains(&(x as isize + dx)) {
-        while grid[(y as isize + dy) as usize][(x as isize + dx) as usize] == '#' {
-            dx = rx.next().unwrap();
-            dy = ry.next().unwrap();
+    while (0..grid_h).contains(&(y as isize + d[0])) && (0..grid_w).contains(&(x as isize + d[1])) {
+        while grid[(y as isize + d[0]) as usize][(x as isize + d[1]) as usize] == '#' {
+            d.rotate_left(1);
         }
-        x = (x as isize + dx) as usize;
-        y = (y as isize + dy) as usize;
+        y = (y as isize + d[0]) as usize;
+        x = (x as isize + d[1]) as usize;
         grid[y][x] = 'X';
-        if !trace.insert(((x, y), (dx, dy))) {
+        if !trace.insert(((x, y), (d[1], d[0]))) {
             return Err(());
         }
     }
