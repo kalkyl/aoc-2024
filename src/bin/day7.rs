@@ -19,21 +19,21 @@ fn main() {
 }
 
 fn sum_valid(equations: &[(u64, Vec<u64>)], operators: &[fn(u64, u64) -> u64]) -> u64 {
-    let mut sum = 0;
-    for (value, numbers) in equations {
-        if (0..operators.len().pow((numbers.len() - 1) as u32)).any(|combination| {
-            let combination_ops = to_base(operators.len(), combination);
-            let mut total = numbers[0];
-            for i in 0..numbers.len() - 1 {
-                let op = *combination_ops.get(i).unwrap_or(&0);
-                total = operators[op](total, numbers[i + 1]);
-            }
-            total == *value
-        }) {
-            sum += value;
-        }
-    }
-    sum
+    equations
+        .iter()
+        .filter(|(value, numbers)| {
+            (0..operators.len().pow((numbers.len() - 1) as u32)).any(|combination| {
+                let combination_ops = to_base(operators.len(), combination);
+                let mut total = numbers[0];
+                for i in 0..numbers.len() - 1 {
+                    let op = *combination_ops.get(i).unwrap_or(&0);
+                    total = operators[op](total, numbers[i + 1]);
+                }
+                total == *value
+            })
+        })
+        .map(|(value, _)| value)
+        .sum()
 }
 
 fn to_base(base: usize, mut num: usize) -> Vec<usize> {
