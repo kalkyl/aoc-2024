@@ -23,7 +23,7 @@ fn sum_valid(equations: &[(u64, Vec<u64>)], operators: &[fn(u64, u64) -> u64]) -
         .iter()
         .filter(|(value, numbers)| {
             (0..operators.len().pow((numbers.len() - 1) as u32)).any(|variant| {
-                let op_pattern = to_base(operators.len(), variant);
+                let op_pattern = pattern(operators.len(), variant);
                 let mut total = numbers[0];
                 for i in 0..numbers.len() - 1 {
                     let op = *op_pattern.get(i).unwrap_or(&0);
@@ -36,11 +36,11 @@ fn sum_valid(equations: &[(u64, Vec<u64>)], operators: &[fn(u64, u64) -> u64]) -
         .sum()
 }
 
-fn to_base(base: usize, mut num: usize) -> Vec<usize> {
+fn pattern(variants: usize, mut num: usize) -> Vec<usize> {
     let mut positions = Vec::new();
     while num > 0 {
-        positions.push(num % base);
-        num /= base;
+        positions.push(num % variants);
+        num /= variants;
     }
     positions
 }
