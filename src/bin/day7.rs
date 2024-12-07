@@ -36,11 +36,11 @@ fn sum_valid(equations: &[(u64, Vec<u64>)], operators: &[fn(u64, u64) -> u64]) -
         .sum()
 }
 
-fn pattern(variants: usize, mut num: usize) -> Vec<usize> {
+fn pattern(operations: usize, mut num: usize) -> Vec<usize> {
     let mut positions = Vec::new();
     while num > 0 {
-        positions.push(num % variants);
-        num /= variants;
+        positions.push(num % operations);
+        num /= operations;
     }
     positions
 }
