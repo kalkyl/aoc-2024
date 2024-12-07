@@ -11,10 +11,10 @@ fn main() {
         })
         .collect();
 
-    let sum = sum_valid(&equations, &[add, multiply]);
+    let sum = sum_valid(&equations, &[u64::wrapping_add, u64::wrapping_mul]);
     println!("Part one: {sum}");
 
-    let sum = sum_valid(&equations, &[add, multiply, concat]);
+    let sum = sum_valid(&equations, &[u64::wrapping_add, u64::wrapping_mul, concat]);
     println!("Part two: {sum}");
 }
 
@@ -43,14 +43,6 @@ fn pattern(operators: usize, mut variant: usize) -> Vec<usize> {
         variant /= operators;
     }
     positions
-}
-
-fn add(a: u64, b: u64) -> u64 {
-    a + b
-}
-
-fn multiply(a: u64, b: u64) -> u64 {
-    a * b
 }
 
 fn concat(a: u64, b: u64) -> u64 {
