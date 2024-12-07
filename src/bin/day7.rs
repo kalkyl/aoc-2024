@@ -36,12 +36,12 @@ fn sum_valid(equations: &[(u64, Vec<u64>)], operators: &[fn(u64, u64) -> u64]) -
 }
 
 fn pattern(len: usize, operators: usize, mut variant: usize) -> Vec<usize> {
-    let mut positions = vec![0; len];
-    for p in positions.iter_mut() {
+    let mut pattern = vec![0; len];
+    for p in pattern.iter_mut() {
         *p = variant % operators;
         variant /= operators;
     }
-    positions
+    pattern
 }
 
 fn concat(a: u64, b: u64) -> u64 {
